@@ -11,11 +11,17 @@ Note that with the free version, up to 300 requests can be made per day.
 import requests
 
 # Request the launch data
-launch_data = requests.get("https://ll.thespacedevs.com/2.0.0/launch/upcoming")
+orig_data = requests.get("https://ll.thespacedevs.com/2.0.0/launch/upcoming")
 
 class Launchlib:
+    """
+    Init: create a json library from the requested data
+    """
     def __init__(self):
-        self.launch_data = launch_data
+        self.launch_data = orig_data.json()
+
+
+
 
 
 
