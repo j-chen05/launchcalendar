@@ -7,6 +7,75 @@ load_dotenv()
 
 import os
 from gcal import Gcal
+from launchlib import Launchlib
+
+
+def run_interface():
+    location = None
+    agency = None
+
+    # Part 1: ask user for location filters
+    while True:
+        print("Filter by location: enter a country name, otherwise, type 'skip'")
+        loc = input()
+        if loc != "skip" and loc != "":
+            location = loc
+            print("Searching for launches in " + location)
+        elif loc == "":
+            print("Please enter a valid country.")
+            continue
+        elif loc == "skip":
+            location = None
+
+        # Part 2: ask user for agency filters
+        print("Filter by agency: enter the name of a preferred agency, otherwise, type 'skip'")
+        while True:
+            ag = input()
+            if ag != "skip" and ag != "":
+                agency = ag
+                print("Searching for launches by " + agency)
+            elif ag == "":
+                print("Please enter a valid agency.")
+                continue
+            elif ag == "skip":
+                agency = None
+
+            # Search with these parameters
+            test = Launchlib()
+            results = test.search(location, agency)
+
+            # Part 3: display results
+            # if no launches found, prompt user to start over or quit
+            if not len(results):
+                print("No launches found for the specified filters.")
+                print("Enter 'y' to search again. Enter 'q' to quit.")
+                while True:
+                    user = input()
+                    if user == "y":
+                        break
+                    elif user == "q":
+                        return
+                    else:
+                        print("Enter 'y' to search again. Enter 'q' to quit.")
+                        continue
+                # break out of this loop (return to the first one)
+                break
+            # if launches found, display results
+            else:
+                print("[" + str(len(results)) + "]" + " launches found:")
+                count = 1
+                for launch in results:
+                    print(str(count))
+                    print(launch)
+                    print("---------------------------")
+                    count += 1
+
+                # Part 4: Ask if user wants to put anything in their calendar
+
+
+
+
+
 
 client_id = os.environ.get('CLIENT_ID')
 project_id = os.environ.get('PROJECT_ID')
@@ -19,57 +88,7 @@ cal_handler = Gcal()
 cal_handler.authorize(client_id, project_id, client_secret)
 
 print("Welcome to Launch Calendar!")
-print("Filter by location: enter your country, otherwise, type 'skip'")
 
-# Part 1: set location filters
-location = None
-agency = None
-while True:
-    loc = input()
-    if loc != "skip" and loc != "" :
-        location = loc
-        print("Location: " + location)
-    elif loc == "":
-        print("Please enter a valid country.")
-        continue
-    elif loc == "skip":
-        location = None
-    break
-
-# Part 2: set agency filters
-print("Filter by agency: enter the name of a preferred agency, otherwise, type 'skip'")
-while True:
-    ag = input()
-    if ag != "skip" and ag != "":
-        agency = ag
-        print("Agency: " + agency)
-    elif ag == "":
-        print("Please enter a valid agency.")
-        continue
-    elif ag == "skip":
-        ag = None
-    break
-
-# Search with these parameters
-
-# Ask if user wants to add a specific event to calendar (input number of result)
-
-
-# if found: display results, if not found, prompt user to try again or quit
-    # in this case, reexecute function
-
-
-
-
-
-
-
-print(location)
-print(agency)
-
-
-
-
-
+run_interface()
 
 print("See you space cowboy!")
