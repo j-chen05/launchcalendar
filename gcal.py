@@ -1,4 +1,5 @@
 """
+Author: Jacob Chen 2020
 gcalendar_api
 - Class that requests and manages/parses data from the Google Calendar API.
 - If user wishes to use this app, they must authorize their Google account when prompted.
@@ -15,12 +16,15 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+from launch_obj import Launch_obj
+
 # Scope of the program (in this case, read/write access to the main calendar
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 class Gcal:
     def __init__(self):
         self.creds = None
+        self.service = None
 
     """ALWAYS INVOKE THIS FUNCTION FIRST
     authorize(): Authorize the app for read/write access to your Google Calendar
@@ -61,22 +65,84 @@ class Gcal:
 
         # Log creds with self variable
         self.creds = creds
+        self.service = build('calendar', 'v3', credentials=self.creds)
 
-    # print out the first 10 events
-    def ten_events(self):
-        service = build('calendar', 'v3', credentials=self.creds)
+    """
+    event_exists(launch_event): Check if the provided launch event already exists, and if so, return that event
+        - User passes in a launch_obj, which is then compared to all the events on the day of this launch_obj, to see
+        if this event has been added already
+    Return value: returns a Google Calendar event if the launch_obj event is indeed on your calendar already
+                  returns None if the launch_obj event was not on your calendar 
+                  (it is new or something changed about the launch's identity)
+    """
+    def event_exists(self, launch_event):
+        # Get date and summary of launch event
+        date = launch_event.date
+        summary = launch_event.name
 
-        now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-        print('Getting the upcoming 10 events')
-        events_result = service.events().list(calendarId='primary', timeMin=now,
-                                              maxResults=10, singleEvents=True,
-                                              orderBy='startTime').execute()
-        events = events_result.get('items', [])
+        # Get start and end times for the date of this launch event
+        start = date + 'T' + '00:00:00' + 'Z'
+        end = date + 'T' + '23:59:59' + 'Z'
 
-        if not events:
-            print('No upcoming events found.')
-        for event in events:
-            start = event['start'].get('dateTime', event['start'].get('date'))
-            print(start, event['summary'])
+        # Create list of events on the launch event's day, and see if any events match with the summary
+        # if so, return that event
+        events = self.service.events().list(calendarId='primary', timeMin=start, timeMax=end).execute()
+        for event in events['items']:
+            this_event_summary = event['summary']
+            if this_event_summary == summary:
+                return event
 
-    # we need: add function, update function.
+        # if no events matched, that means this is a new event. Return None.
+        return None
+
+    """
+    update(launch_event, event_to_update): update a selected event to the most recent information gathered by the 
+    Launch Library API
+        - User provides a launch_obj and an event they would like to update
+        - Function will fetch the current data, namely time and description
+    """
+    def update(self, launch_event, event_to_update):
+        new_event = self.service.events().get(calendarId='primary', eventId=event_to_update['id']).execute()
+
+        # Update time/description components of the event
+        new_event['start']['dateTime'] = launch_event.window_start[0:19] + '-07:00'
+        new_event['end']['dateTime'] = launch_event.window_end[0:19] + '-07:00'
+        new_event['description'] = launch_event.description
+
+        # Update the event
+        self.service.events().update(calendarId='primary', eventId=new_event['id'], body=new_event).execute()
+
+    """
+    add(launch_event)
+    - add the provided launch_obj to your calendar
+    """
+    def add(self, launch_event):
+        # Get the user's timezone settings
+        tz = self.service.settings().get(setting='timezone').execute()
+        timezone = tz['value']
+
+        # Customize a new event in Calendar API's format
+        event = {
+            'summary': launch_event.name,
+            'location': launch_event.location,
+            'description': launch_event.description,
+            'start': {
+                'dateTime': launch_event.window_start[0:19] + '-07:00',
+                'timeZone': timezone,
+            },
+            'end': {
+                'dateTime': launch_event.window_end[0:19] + '-07:00',
+                'timeZone': timezone,
+            },
+            'reminders': {
+                'useDefault': False,
+                'overrides': [
+                    {'method': 'email', 'minutes': 24 * 60},
+                    {'method': 'popup', 'minutes': 10},
+                ],
+            },
+        }
+
+        # Add event to calendar
+        event = self.service.events().insert(calendarId='primary', body=event).execute()
+        print('Event created: %s' % (event.get('htmlLink')))

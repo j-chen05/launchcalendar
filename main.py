@@ -1,16 +1,18 @@
 """
-main driver for program
+Author: Jacob Chen 2020
+main.py
+- Main driver for Launch Calendar.
+- Launch Calendar is a command-line interface that lets you search for the most recent rocket launches by location and agency
+and potentially add them to your Google Calendar.
 """
-
-from dotenv import load_dotenv
-load_dotenv()
 
 import os
 from gcal import Gcal
 from launchlib import Launchlib
+from dotenv import load_dotenv
+load_dotenv()
 
-
-def run_interface():
+def run_interface(cal_handler):
     location = None
     agency = None
 
@@ -40,9 +42,10 @@ def run_interface():
             elif ag == "skip":
                 agency = None
 
-            # Search with these parameters
-            test = Launchlib()
-            results = test.search(location, agency)
+            # Initialize a new instance of the Launch Library API
+            launch_library = Launchlib()
+            # Search it with these parameters
+            results = launch_library.search(location, agency)
 
             # Part 3: display results
             # if no launches found, prompt user to start over or quit
@@ -71,24 +74,32 @@ def run_interface():
                     count += 1
 
                 # Part 4: Ask if user wants to put anything in their calendar
+                event = cal_handler.event_exists(results[0])
+                if event:
+                    print("This launch was already detected in your calendar. Updating to most up-to-date information.")
+                    cal_handler.update(results[0], event)
+                else:
+                    cal_handler.add(results[0])
+                    print("Added this event to your calendar.")
 
 
 
 
-
-
+# Get env variables for authorization
 client_id = os.environ.get('CLIENT_ID')
 project_id = os.environ.get('PROJECT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 
-# constructor
+# Construct a new instance of the Gcal class
 cal_handler = Gcal()
 
-# try authorize
+# Try to authorize the user's GOogle Account
 cal_handler.authorize(client_id, project_id, client_secret)
 
+# Program start
 print("Welcome to Launch Calendar!")
+# Main interface function
+run_interface(cal_handler)
 
-run_interface()
-
+# End
 print("See you space cowboy!")
