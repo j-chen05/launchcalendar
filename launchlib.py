@@ -20,6 +20,14 @@ class Launchlib:
     def __init__(self):
         self.launch_data = orig_data.json()
 
+    def search(self, location, agency_name):
+        for result in self.launch_data['results']:
+            print(result['name'])
+            print(result['pad']['location']['name'])
+            print(result['launch_service_provider']['name'])
+            print(str(result['window_start']) + ' to ' + str(result['window_end']))
+            print()
+
 
 
 

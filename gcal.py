@@ -37,8 +37,8 @@ class Gcal:
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
-        if os.path.exists('./APIs/token.pickle'):
-            with open('./APIs/token.pickle', 'rb') as token:
+        if os.path.exists('API Data/token.pickle'):
+            with open('API Data/token.pickle', 'rb') as token:
                 creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
@@ -56,7 +56,7 @@ class Gcal:
                 flow = InstalledAppFlow.from_client_config(client_config=clientcfg, scopes=SCOPES)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
-            with open('./APIs/token.pickle', 'wb') as token:
+            with open('API Data/token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
         # Log creds with self variable
@@ -79,3 +79,4 @@ class Gcal:
             start = event['start'].get('dateTime', event['start'].get('date'))
             print(start, event['summary'])
 
+    # we need: add function, update function.
