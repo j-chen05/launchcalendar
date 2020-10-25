@@ -10,4 +10,8 @@ client_id = os.environ.get('CLIENT_ID')
 project_id = os.environ.get('PROJECT_ID')
 client_secret = os.environ.get('CLIENT_SECRET')
 
+print(client_id)
+print(project_id)
+print(client_secret)
+
 print("succeeded")
