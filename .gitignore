@@ -2,3 +2,4 @@
 /APIs/credentials.json
 /APIs/
 ./APIs/credentials.json
+.env

@@ -27,9 +27,9 @@ class Gcal:
     Usage:
         - After executing, the function will open up a default browser tab to prompt the user to log 
         into their Google account.
-        - Failure to log in will not open app functionality.
+        - Failure to log in will not allow app to function.
     """
-    def authorize(self):
+    def authorize(self, client_id, project_id, client_secret):
         """
         Code taken from the Python quickstart code on Google Calendar API's documentation website
         """
@@ -45,15 +45,22 @@ class Gcal:
             if creds and creds.expired and creds.refresh_token:
                 creds.refresh(Request())
             else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    './APIs/credentials.json', SCOPES)
+                clientcfg = {"installed":
+                                    {"client_id":client_id,
+                                     "project_id":project_id,
+                                     "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+                                     "token_uri":"https://oauth2.googleapis.com/token",
+                                     "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+                                     "client_secret":client_secret,
+                                     "redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}
+                flow = InstalledAppFlow.from_client_config(client_config=clientcfg, scopes=SCOPES)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
             with open('./APIs/token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
+        # Log creds with self variable
         self.creds = creds
-
 
     # print out the first 10 events
     def ten_events(self):
