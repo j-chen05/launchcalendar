@@ -125,7 +125,7 @@ The events will also be aptly named and filled with interesting information from
 Rocket launch schedules are fluid and face frequent delays. If the user chooses to add a launch event that has already been added to their calendar by the app, it will update the existing
 calendar event with any updates in mission description and/or launch date and timing.
     
-    - As of now, the app will only edit an event if it is still on the same day. The app will add a new event for a launch if it has been moved to a different          day (it's faster)
+- As of now, the app will only edit an event if it is still on the same day. The app will add a new event for a launch if it has been moved to a different day (it's faster)
 
 If the user wants to delete an event, they must delete it manually from their Google Calendar.
 
