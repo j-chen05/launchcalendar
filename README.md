@@ -17,6 +17,8 @@ This was the motivation for Launch Calendar. It automates these things by retrie
 adding them straight to your Google Calendar. Launch Calendar is helpful for quickly logging upcoming launches en masse so that you have them marked down on your
 calendar before you forget, and for quickly updating your calendar to reflect sudden launch delays.
 
+It was also a fun way to learn how to work with APIs!
+
 # Setup
 After downloading the app, for safety reasons you will need to acquire your own Google Calendar API key.
 1) Go to https://developers.google.com/calendar/quickstart/python and follow step 1 to get your own API key.

@@ -148,6 +148,6 @@ run_interface(cal_handler)
 
 # End
 print()
-print("Go see those launches! (if you can!!!)")
+print("Go see those launches! (if you can!!)")
 print("Thanks for using Launch Calendar. Safe flying!")
 
