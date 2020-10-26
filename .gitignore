@@ -1,6 +1,4 @@
 /API Data/token.pickle
 /API Data/credentials.json
-/API Data/
-API Data/credentials.json
 .env
 test.py
