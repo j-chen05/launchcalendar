@@ -48,21 +48,21 @@ class Launchlib:
             # keywords provided match
             if location != None and agency != None:
                 if location in result_loc and agency in result_ag:
-                    obj = Launch_obj(result['name'], result['pad']['location']['name'],
+                    obj = Launch_obj(result['name'], result['pad']['location']['name'], result['launch_service_provider']['name'],
                                      result['mission']['description'], result['window_start'][0:10], result['window_start'], result['window_end'])
                     results_list.append(obj)
             elif location != None and agency == None:
                 if location in result_loc:
-                    obj = Launch_obj(result['name'], result['pad']['location']['name'],
+                    obj = Launch_obj(result['name'], result['pad']['location']['name'], result['launch_service_provider']['name'],
                                      result['mission']['description'], result['window_start'][0:10], result['window_start'], result['window_end'])
                     results_list.append(obj)
             elif location == None and agency != None:
                 if agency in result_ag:
-                    obj = Launch_obj(result['name'], result['pad']['location']['name'],
+                    obj = Launch_obj(result['name'], result['pad']['location']['name'], result['launch_service_provider']['name'],
                                      result['mission']['description'], result['window_start'][0:10], result['window_start'], result['window_end'])
                     results_list.append(obj)
             elif location == None and agency == None:
-                obj = Launch_obj(result['name'], result['pad']['location']['name'],
+                obj = Launch_obj(result['name'], result['pad']['location']['name'], result['launch_service_provider']['name'],
                                  result['mission']['description'], result['window_start'][0:10], result['window_start'], result['window_end'])
                 results_list.append(obj)
 

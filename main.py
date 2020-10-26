@@ -23,7 +23,7 @@ def run_interface(cal_handler):
 
     # Part 1: ask user for location filters
     while True:
-        print("Filter by location: enter name of a country name, or location keyword; otherwise, type 'skip'")
+        print("Filter by location: enter name of a country, or location keyword; otherwise, type 'skip'")
         loc = input()
         if loc != "skip" and loc != "":
             location = loc
@@ -82,8 +82,8 @@ def run_interface(cal_handler):
 
                 # Part 4: Ask if user wants to put anything in their calendar
                 while True:
-                    print("Input the number of the event you would like to add to your calendar.")
-                    print("Enter 's' to search again, or 'q' to quit.")
+                    print("Input the integer of the event you would like to add to your calendar.")
+                    print("Or, enter 's' to search again, or 'q' to quit.")
                     ID = input()
 
                     # If an integer was input
@@ -141,12 +141,13 @@ cal_handler.authorize(client_id, project_id, client_secret)
 
 # Program start
 print("Welcome to Launch Calendar!")
-print("Launch Calendar will search for upcoming rocket launches that you can put on your Google Calendar.")
-print("First, provide search filters, if desired:")
+print("Launch Calendar will search for upcoming rocket launches that you can add to your Google Calendar.")
+print("First, provide search filters, if desired. Note searches are NOT case sensitive.")
 # Main interface function
 run_interface(cal_handler)
 
 # End
 print()
-print("Thanks for using Launch Calendar!")
-print("Now go see those launches! (if you can!!)")
+print("Go see those launches! (if you can!!!)")
+print("Thanks for using Launch Calendar. Safe flying!")
+

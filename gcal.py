@@ -10,14 +10,11 @@ https://developers.google.com/calendar/v3/reference
 """
 
 from __future__ import print_function
-import datetime
 import pickle
 import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
-
-from launch_obj import Launch_obj
 
 # Scope of the program (in this case, read/write access to the main calendar
 SCOPES = ['https://www.googleapis.com/auth/calendar']
@@ -36,7 +33,7 @@ class Gcal:
     """
     def authorize(self, client_id, project_id, client_secret):
         """
-        Code taken from the Python quickstart code on Google Calendar API's documentation website
+        Code used and modified from the Python quickstart code on Google Calendar API's documentation website
         """
         creds = None
         # The file token.pickle stores the user's access and refresh tokens, and is
@@ -99,7 +96,7 @@ class Gcal:
     """
     update(launch_event, event_to_update): update a selected event to the most recent information gathered by the 
     Launch Library API
-        - User provides a launch_obj and an event they would like to update
+        - User provides a launch_obj (launch_event parameter) and an event they would like to update
         - Function will fetch the current data, namely time and description
     """
     def update(self, launch_event, event_to_update):
@@ -115,7 +112,7 @@ class Gcal:
 
     """
     add(launch_event)
-    - add the provided launch_obj to your calendar
+        - add the provided launch_obj (launch_event) to your calendar
     """
     def add(self, launch_event):
         # Customize a new event in Calendar API's format

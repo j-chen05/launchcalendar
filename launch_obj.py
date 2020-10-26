@@ -10,10 +10,11 @@ class Launch_obj:
     Init
         - init with relevant input values
     """
-    def __init__(self, name="none provided", location="none provided", description="none provided",
+    def __init__(self, name="none provided", location="none provided", agency="none provided", description="none provided",
                  date="none provided", window_start="none provided", window_end="none provided"):
         self.name = name
         self.location = location
+        self.agency = agency
         self.description = description
         self.date = date
         self.window_start = window_start
@@ -24,6 +25,7 @@ class Launch_obj:
         - print out all information in readable format
     """
     def __str__(self):
-        return "Launch Vehicle: " + self.name + "\n" + "Location: " + self.location + "\n" + "Purpose of launch: " \
+        return "Launch Vehicle: " + self.name + "\n" + "Location: " + self.location + "\n" + "Agency: " + self.agency \
+               + "\n" + "Purpose of launch: " \
                + self.description + "\n" + "Launch date: " + self.date + "\n" + "Launch window (UTC): " \
                + self.window_start + " -- " + self.window_end
