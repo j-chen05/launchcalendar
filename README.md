@@ -119,7 +119,7 @@ of a new event, at the correct time based on your calendar's time zone.
 
 ![](images/calendar_add.png)
 
-The events will also be aptly named and filled with interesting information from the database!
+The events will also be aptly named and filled with interesting information from the database regarding the launch/mission!
 
 ![](images/calendardesc.png)
 
