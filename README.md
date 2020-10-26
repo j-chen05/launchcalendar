@@ -50,8 +50,8 @@ one of them on your calendar.
 
 ### Functionality
 
-*** Note that for safety concerns, this app will only ADD calendar events or MODIFY events it has already added. There is currently
-no functionality for removing any calendar events to prevent abuse.***
+*** Note that for safety concerns, this app will ONLY ADD calendar events or MODIFY events it has already added. There is currently
+NO functionality for DELETING calendar events to prevent abuse.***
 
 The app functions via intuitive command line prompts and inputs. Here is a sample run:
 ```
