@@ -22,6 +22,8 @@ It was also a fun way to learn how to work with APIs!
 # Setup
 After downloading the app, for safety reasons you will need to acquire your own Google Calendar API key.
 1) Go to https://developers.google.com/calendar/quickstart/python and follow step 1 to get your own API key.
+- The Project Name you choose does not matter.
+- When prompted, configure OAuth client for Desktop app in the dropdown menu.
 2) Download the file. It should save under the filename ```credentials.json```
 3) Afterwards, create a ```.env``` file in the main directory.
 4) Copy over the contents of the ```.env.default``` file to your newly created ```.env``` file.
@@ -30,13 +32,14 @@ After downloading the app, for safety reasons you will need to acquire your own 
 corresponding fields in your ```credentials.json``` and replace the variable values in ```.env``` with these new values.
     - No punctuation - just replace the entire default value with the value from ```credentials.json```
 
-# Run Application
+# Running the Application
 Run main.py from your IDE or from command-line:
 ```python3 main.py```
 
 The app will prompt you to log into your Google Account. Choose the account you would like to give the app calendar access to.
 - As of October 2020 this app has not yet been authorized, and you will see a warning. However it is not malicious.
- Click 'advanced' and proceed to allow the app to access your calendar for read/write access where prompted.
+ Click 'advanced' and proceed to allow the app to access your calendar for see/edit/share/delete access where prompted.
+    - Disclaimer: the app will not delete anything from your calendar. See Usage.
 - If you encounter an error, your API key information in the ```.env``` file may be incorrect.
 
 This will create a file ```token.pickle``` in the API Data directory. To unauthorize your account at any time, simply delete this file.
