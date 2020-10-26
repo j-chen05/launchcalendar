@@ -38,17 +38,14 @@ class Launchlib:
         if agency != None:
             agency = agency.lower()
 
+        # Search through all
         for result in self.launch_data['results']:
+            # Make all data lowercase so the search can be not case sensitive
             result_loc = (result['pad']['location']['name']).lower()
             result_ag = (result['launch_service_provider']['name']).lower()
 
-            # print("user inputs")
-            # print(location)
-            # print(agency)
-            # print("comparing to items in data")
-            # print(result_loc)
-            # print(result_ag)
-
+            # Search through the launch data in all four scenarios of parameters provided, add to results_list if the location/agency
+            # keywords provided match
             if location != None and agency != None:
                 if location in result_loc and agency in result_ag:
                     obj = Launch_obj(result['name'], result['pad']['location']['name'],
@@ -70,4 +67,3 @@ class Launchlib:
                 results_list.append(obj)
 
         return results_list
-

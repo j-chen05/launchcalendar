@@ -1,8 +1,9 @@
 """
 Author: Jacob Chen 2020
-gcalendar_api
+gcal.py
 - Class that requests and manages/parses data from the Google Calendar API.
 - If user wishes to use this app, they must authorize their Google account when prompted.
+- For security reasons, this app currently does not support deletion of events, only adding/editing.
 
 Google Calendar API by Google:
 https://developers.google.com/calendar/v3/reference

@@ -12,6 +12,11 @@ from launchlib import Launchlib
 from dotenv import load_dotenv
 load_dotenv()
 
+"""
+run_interface(cal_handler): Runs the main interface a user will see on their command line.
+    - Grabs recent launch data within, by instantiating a new launchlib object.
+    - Must provide a Gcal class as parameter.
+"""
 def run_interface(cal_handler):
     location = None
     agency = None

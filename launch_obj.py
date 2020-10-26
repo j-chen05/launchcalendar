@@ -27,4 +27,3 @@ class Launch_obj:
         return "Launch Vehicle: " + self.name + "\n" + "Location: " + self.location + "\n" + "Purpose of launch: " \
                + self.description + "\n" + "Launch date: " + self.date + "\n" + "Launch window (UTC): " \
                + self.window_start + " -- " + self.window_end
-
