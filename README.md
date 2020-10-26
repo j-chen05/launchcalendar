@@ -1,5 +1,5 @@
 # Launch Calendar 🚀
-Launch Calendar is a command-line app created in Python that searches for upcoming rocket launches and automates scheduling of them on your Google Calendar, if you would like to see it in person (if possible), or just as a reminder to watch the 
+Launch Calendar is a command-line app created in Python that searches for upcoming rocket launches and automates scheduling of them on your Google Calendar, to help you plan ahead if you would like to see it in person or make sure you don't miss the
 webcast.
 
 A rocket launch is cool enough on its own. However, one cannot truly grasp the power of these machines until a launch is watched in person. The size of the rocket. 
