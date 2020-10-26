@@ -18,26 +18,26 @@ def run_interface(cal_handler):
 
     # Part 1: ask user for location filters
     while True:
-        print("Filter by location: enter a country name, otherwise, type 'skip'")
+        print("Filter by location: enter name of a country name, or location keyword; otherwise, type 'skip'")
         loc = input()
         if loc != "skip" and loc != "":
             location = loc
             print("Searching for launches in " + location)
         elif loc == "":
-            print("Please enter a valid country.")
+            print("Please enter a valid name or keyword.")
             continue
         elif loc == "skip":
             location = None
 
         # Part 2: ask user for agency filters
-        print("Filter by agency: enter the name of a preferred agency, otherwise, type 'skip'")
+        print("Filter by agency: enter name of a preferred agency, or agency keyword; otherwise, type 'skip'")
         while True:
             ag = input()
             if ag != "skip" and ag != "":
                 agency = ag
                 print("Searching for launches by " + agency)
             elif ag == "":
-                print("Please enter a valid agency.")
+                print("Please enter a valid name or keyword.")
                 continue
             elif ag == "skip":
                 agency = None
@@ -51,6 +51,7 @@ def run_interface(cal_handler):
             # if no launches found, prompt user to start over or quit
             if not len(results):
                 print("No launches found for the specified filters.")
+                print()
                 print("Enter 's' to search again. Enter 'q' to quit.")
                 while True:
                     user = input()
@@ -79,7 +80,6 @@ def run_interface(cal_handler):
                     print("Input the number of the event you would like to add to your calendar.")
                     print("Enter 's' to search again, or 'q' to quit.")
                     ID = input()
-                    print(ID)
 
                     # If an integer was input
                     # Try to convert to an integer
@@ -89,6 +89,7 @@ def run_interface(cal_handler):
                     # If can't convert, then it was either a key or something else
                     except ValueError:
                         if ID == 's':
+                            print()
                             break
                         if ID == 'q':
                             return
@@ -135,7 +136,7 @@ cal_handler.authorize(client_id, project_id, client_secret)
 
 # Program start
 print("Welcome to Launch Calendar!")
-print("Launch Calendar will search for upcoming rocket launches to put on your calendar.")
+print("Launch Calendar will search for upcoming rocket launches that you can put on your Google Calendar.")
 print("First, provide search filters, if desired:")
 # Main interface function
 run_interface(cal_handler)
@@ -143,4 +144,4 @@ run_interface(cal_handler)
 # End
 print()
 print("Thanks for using Launch Calendar!")
-print("Now go watch those launches!")
+print("Now go see those launches! (if you can!!)")
