@@ -8,7 +8,7 @@ When I watched a launch with my Dad for the first time,
 it was quite an inspiring experience, and is in part why we now follow spaceflight so closely. For anyone casually interested in spaceflight, I highly recommend watching a launch in person.
 
 ![](images/IMG_0015.JPG)
-###### Delta IV Launch, 2013
+###### Delta IV Launch at Vandenburg Air Force Base, California, 2013
 
 My Dad and I try to catch rocket launches when we get the chance, both in-person and via livestreams. However, they are difficult to follow. Online schedules can often be incomplete, and launch
 schedules are always changing due to weather or mechanical issues. Rocket launches are also not very publicized. Launches are hard to schedule for, and easy to miss. 
