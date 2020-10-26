@@ -19,8 +19,12 @@ class Launch_obj:
         self.window_start = window_start
         self.window_end = window_end
 
+    """
+    Str
+        - print out all information in readable format
+    """
     def __str__(self):
         return "Launch Vehicle: " + self.name + "\n" + "Location: " + self.location + "\n" + "Purpose of launch: " \
-               + self.description + "\n" + "Launch date: " + self.date + "\n" + "Launch time frame: " \
+               + self.description + "\n" + "Launch date: " + self.date + "\n" + "Launch window (UTC): " \
                + self.window_start + " -- " + self.window_end
 

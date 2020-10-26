@@ -2,7 +2,7 @@
 Author: Jacob Chen 2020
 main.py
 - Main driver for Launch Calendar.
-- Launch Calendar is a command-line interface that lets you search for the most recent rocket launches by location and agency
+- Launch Calendar is a command-line app that lets you search for the most recent rocket launches by location and agency
 and potentially add them to your Google Calendar.
 """
 
@@ -51,20 +51,21 @@ def run_interface(cal_handler):
             # if no launches found, prompt user to start over or quit
             if not len(results):
                 print("No launches found for the specified filters.")
-                print("Enter 'y' to search again. Enter 'q' to quit.")
+                print("Enter 's' to search again. Enter 'q' to quit.")
                 while True:
                     user = input()
-                    if user == "y":
+                    if user == "s":
                         break
                     elif user == "q":
                         return
                     else:
-                        print("Enter 'y' to search again. Enter 'q' to quit.")
+                        print("Enter 's' to search again. Enter 'q' to quit.")
                         continue
                 # break out of this loop (return to the first one)
                 break
             # if launches found, display results
             else:
+                print()
                 print("[" + str(len(results)) + "]" + " launches found:")
                 count = 1
                 for launch in results:
@@ -74,14 +75,50 @@ def run_interface(cal_handler):
                     count += 1
 
                 # Part 4: Ask if user wants to put anything in their calendar
-                event = cal_handler.event_exists(results[0])
-                if event:
-                    print("This launch was already detected in your calendar. Updating to most up-to-date information.")
-                    cal_handler.update(results[0], event)
-                else:
-                    cal_handler.add(results[0])
-                    print("Added this event to your calendar.")
+                while True:
+                    print("Input the number of the event you would like to add to your calendar.")
+                    print("Enter 's' to search again, or 'q' to quit.")
+                    ID = input()
+                    print(ID)
 
+                    # If an integer was input
+                    # Try to convert to an integer
+                    integerID = 0
+                    try:
+                        integerID = int(ID)
+                    # If can't convert, then it was either a key or something else
+                    except ValueError:
+                        if ID == 's':
+                            break
+                        if ID == 'q':
+                            return
+                        print("Please enter a valid character or integer.")
+                        print()
+                        continue
+                    # Check if the integer was in range
+                    if 1 <= integerID <= len(results):
+                        integerID -= 1
+                        # Check if this event exists in the calendar, first.
+                        event = cal_handler.event_exists(results[integerID])
+
+                        if event:
+                            print("The launch of " + results[integerID].name + " on " + results[integerID].date + " was already detected in your calendar. "
+                                  "Updating to most recent launch information.")
+                            cal_handler.update(results[integerID], event)
+                        else:
+                            cal_handler.add(results[integerID])
+                            print("Created a new event for the " + results[integerID].name + " launch in your calendar on " + results[integerID].date + ".")
+                        print()
+                        continue
+
+                    # Go back to original prompt if int was out of range
+                    else:
+                        print("There is no rocket launch by this number.")
+                        print()
+                        continue
+
+                # For the path where s is input: go back to search
+                break
 
 
 
@@ -98,8 +135,12 @@ cal_handler.authorize(client_id, project_id, client_secret)
 
 # Program start
 print("Welcome to Launch Calendar!")
+print("Launch Calendar will search for upcoming rocket launches to put on your calendar.")
+print("First, provide search filters, if desired:")
 # Main interface function
 run_interface(cal_handler)
 
 # End
-print("See you space cowboy!")
+print()
+print("Thanks for using Launch Calendar!")
+print("Now go watch those launches!")

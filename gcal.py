@@ -105,8 +105,8 @@ class Gcal:
         new_event = self.service.events().get(calendarId='primary', eventId=event_to_update['id']).execute()
 
         # Update time/description components of the event
-        new_event['start']['dateTime'] = launch_event.window_start[0:19] + '-07:00'
-        new_event['end']['dateTime'] = launch_event.window_end[0:19] + '-07:00'
+        new_event['start']['dateTime'] = launch_event.window_start[0:19]
+        new_event['end']['dateTime'] = launch_event.window_end[0:19]
         new_event['description'] = launch_event.description
 
         # Update the event
@@ -117,22 +117,18 @@ class Gcal:
     - add the provided launch_obj to your calendar
     """
     def add(self, launch_event):
-        # Get the user's timezone settings
-        tz = self.service.settings().get(setting='timezone').execute()
-        timezone = tz['value']
-
         # Customize a new event in Calendar API's format
         event = {
             'summary': launch_event.name,
             'location': launch_event.location,
             'description': launch_event.description,
             'start': {
-                'dateTime': launch_event.window_start[0:19] + '-07:00',
-                'timeZone': timezone,
+                'dateTime': launch_event.window_start[0:19],
+                'timeZone': 'UTC',
             },
             'end': {
-                'dateTime': launch_event.window_end[0:19] + '-07:00',
-                'timeZone': timezone,
+                'dateTime': launch_event.window_end[0:19],
+                'timeZone': 'UTC',
             },
             'reminders': {
                 'useDefault': False,
