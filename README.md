@@ -33,16 +33,17 @@ corresponding fields in your ```credentials.json``` and replace the variable val
     - No punctuation - just replace the entire default value with the value from ```credentials.json```
 
 # Running the Application
-Run main.py from your IDE or from command-line:
+1) Run main.py from your IDE or from command-line:
 ```python3 main.py```
 
-The app will prompt you to log into your Google Account. Choose the account you would like to give the app calendar access to.
-- As of October 2020 this app has not yet been authorized, and you will see a warning. However it is not malicious.
+2) The app will prompt you to log into your Google Account. Choose the account you would like to give the app calendar access to.
+3) As of October 2020 this app has not yet been authorized, and you will see a warning. However it is not malicious.
  Click 'advanced' and proceed to allow the app to access your calendar for see/edit/share/delete access where prompted.
     - Disclaimer: the app will not delete anything from your calendar. See Usage.
-- If you encounter an error, your API key information in the ```.env``` file may be incorrect.
+    - If you encounter an error, your API key information in the ```.env``` file may be incorrect.
 
-This will create a file ```token.pickle``` in the API Data directory. To unauthorize your account at any time, simply delete this file.
+4) Completing authorization will create a file ```token.pickle``` in the main directory. 
+    - To unauthorize your account at any time, simply delete this file.
 
 You should be all set. Follow the prompts and input command line inputs to start browsing and scheduling upcoming launches!
 
@@ -58,15 +59,15 @@ NO functionality for DELETING calendar events to prevent abuse.***
 
 The app functions via intuitive command line prompts and inputs. Here is a sample run:
 ```
-Welcome to Launch Calendar!
+---Welcome to Launch Calendar!---
 Launch Calendar will search for upcoming rocket launches that you can add to your Google Calendar.
 First, provide search filters, if desired. Note searches are NOT case sensitive.
+
 Filter by location: enter name of a country, or location keyword; otherwise, type 'skip'
 usa
-Searching for launches in usa
+
 Filter by agency: enter name of a preferred agency, or agency keyword; otherwise, type 'skip'
 spacex
-Searching for launches by spacex
 
 [2] launches found:
 1
@@ -91,14 +92,21 @@ Launch window (UTC): 2020-11-06T00:00:00Z -- 2020-11-06T00:00:00Z
 ---------------------------
 Input the integer of the event you would like to add to your calendar.
 Or, enter 's' to search again, or 'q' to quit.
-2
-Event created: https://www.google.com/calendar/event?eid=dWZhaDMwa2FtbDFiNjVqMm91dGtjYm5yM2sgZWNsaXBzaXN1bWJyYTdAbQ
-Created a new event for the Falcon 9 Block 5 | Sirius SXM-7 launch in your calendar on 2020-11-06.
+1
+Event created: https://www.google.com/calendar/event?eid=b29jaWo2MzkwMnNuOW5wdjgyNWVzb2YybjQgZWNsaXBzaXN1bWJyYTdAbQ
+Created a new event for the Falcon 9 Block 5 | NROL-108 launch in your calendar on 2020-10-31.
 
 Input the integer of the event you would like to add to your calendar.
 Or, enter 's' to search again, or 'q' to quit.
-1
-The launch of Falcon 9 Block 5 | NROL-108 on 2020-10-31 was already detected in your calendar. Updating to most recent launch information.
+2
+The launch of Falcon 9 Block 5 | Sirius SXM-7 on 2020-11-06 was already detected in your calendar. Updating to most recent launch information.
+
+Input the integer of the event you would like to add to your calendar.
+Or, enter 's' to search again, or 'q' to quit.
+q
+
+Go see those launches! (if you can!!)
+Thanks for using Launch Calendar. Safe flying!
 ```
 
 To refine your search, the user will be given prompts to filter launches by location and agency keywords. These searches can be by
@@ -120,7 +128,7 @@ calendar event with any updates in mission description and/or launch date and ti
 
 If the user wants to delete an event, they must delete it manually from their Google Calendar.
 
-To unauthorize the app from accessing the user's Google account, delete the ```token.pickle``` file in the API Data directory.
+To unauthorize the app from accessing the user's Google account, delete the ```token.pickle``` file in the main directory.
 
 # Credits
 

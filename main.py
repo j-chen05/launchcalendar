@@ -27,7 +27,6 @@ def run_interface(cal_handler):
         loc = input()
         if loc != "skip" and loc != "":
             location = loc
-            print("Searching for launches in " + location)
         elif loc == "":
             print("Please enter a valid name or keyword.")
             continue
@@ -35,12 +34,12 @@ def run_interface(cal_handler):
             location = None
 
         # Part 2: ask user for agency filters
+        print()
         print("Filter by agency: enter name of a preferred agency, or agency keyword; otherwise, type 'skip'")
         while True:
             ag = input()
             if ag != "skip" and ag != "":
                 agency = ag
-                print("Searching for launches by " + agency)
             elif ag == "":
                 print("Please enter a valid name or keyword.")
                 continue
@@ -55,8 +54,8 @@ def run_interface(cal_handler):
             # Part 3: display results
             # if no launches found, prompt user to start over or quit
             if not len(results):
-                print("No launches found for the specified filters.")
                 print()
+                print("No launches found for the specified filters.")
                 print("Enter 's' to search again. Enter 'q' to quit.")
                 while True:
                     user = input()
@@ -140,9 +139,10 @@ cal_handler = Gcal()
 cal_handler.authorize(client_id, project_id, client_secret)
 
 # Program start
-print("Welcome to Launch Calendar!")
+print("---Welcome to Launch Calendar!---")
 print("Launch Calendar will search for upcoming rocket launches that you can add to your Google Calendar.")
 print("First, provide search filters, if desired. Note searches are NOT case sensitive.")
+print()
 # Main interface function
 run_interface(cal_handler)
 
